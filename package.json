@@ -1,0 +1,26 @@
+{
+  "name": "highlight",
+  "version": "0.0.1",
+  "description": "Javascript Highlighting Library",
+  "main": "highlight.js",
+  "scripts": {
+    "test": "karma start --single-run"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-typescript": "^2.8.0",
+    "jasmine-core": "^2.3.4",
+    "jquery": "^2.1.4",
+    "karma": "^0.13.3",
+    "karma-chai": "^0.1.0",
+    "karma-jasmine": "^0.3.6",
+    "karma-jasmine-jquery": "^0.1.1",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-spec-reporter": "0.0.20",
+    "phantomjs": "^1.9.17"
+  },
+  "license": "MIT"
+}

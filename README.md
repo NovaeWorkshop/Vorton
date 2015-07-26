@@ -1,2 +1,2 @@
-# highlight
-Javascript Text Highlight
+# Highlight
+Javascript Highlight Library
