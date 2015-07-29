@@ -1,4 +1,6 @@
 bower_components/
 node_modules/
-lib/
+/lib/
 /.floo
+/spec/.dist
+/typings

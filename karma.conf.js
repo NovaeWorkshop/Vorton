@@ -8,7 +8,6 @@ module.exports = function(config) {
 
     files: [
       'node_modules/jquery/dist/jquery.js',
-      'node_modules/karma-jasmine-jquery/jasmine-jquery.js',
       'lib/highlight.js',
       {
         pattern: 'spec/fixtures/*.html',
@@ -16,7 +15,7 @@ module.exports = function(config) {
         included: false,
         served: true
       },
-      'spec/*.spec.js',
+      'spec/.dist/**/*.spec.js',
     ],
     exclude: [],
 

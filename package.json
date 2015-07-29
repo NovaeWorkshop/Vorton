@@ -4,7 +4,8 @@
   "description": "Javascript Highlighting Library",
   "main": "highlight.js",
   "scripts": {
-    "test": "karma start --single-run"
+    "postinstall": "tsd reinstall -so",
+    "test": "gulp test"
   },
   "devDependencies": {
     "chai": "^3.2.0",
@@ -20,7 +21,8 @@
     "karma-jasmine-jquery": "^0.1.1",
     "karma-phantomjs-launcher": "^0.2.0",
     "karma-spec-reporter": "0.0.20",
-    "phantomjs": "^1.9.17"
+    "phantomjs": "^1.9.17",
+    "run-sequence": "^1.1.2"
   },
   "license": "MIT"
 }
