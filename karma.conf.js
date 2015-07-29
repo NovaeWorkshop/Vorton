@@ -5,10 +5,15 @@ module.exports = function(config) {
     basePath: './',
     browsers: ['PhantomJS'],
     frameworks: ['jasmine-jquery', 'jasmine', 'chai'],
-    reporters: ['spec', 'coverage'],
+    reporters: ['spec', 'coverage', 'coveralls'],
 
     preprocessors: {
       'lib/*.js': ['coverage']
+    },
+
+    coverageReporter: {
+      type: 'lcov',
+      dir: 'coverage/'
     },
 
     files: [
