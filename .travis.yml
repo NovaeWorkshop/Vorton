@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - 2.3
+before_install:
+  - npm install -g gulp
+  - npm install -g karma
+  - npm install -g tsd
+repo_token: 299Zbv9iVQIpRbjXSNVPMESNWx7NNw16H

@@ -4,3 +4,4 @@ node_modules/
 /.floo
 /spec/.dist
 /typings
+/coverage

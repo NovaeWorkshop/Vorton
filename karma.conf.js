@@ -5,6 +5,16 @@ module.exports = function(config) {
     basePath: './',
     browsers: ['PhantomJS'],
     frameworks: ['jasmine-jquery', 'jasmine', 'chai'],
+    reporters: ['spec', 'coverage', 'coveralls'],
+
+    preprocessors: {
+      'lib/*.js': ['coverage']
+    },
+
+    coverageReporter: {
+      type: 'lcov',
+      dir: 'coverage/'
+    },
 
     files: [
       'node_modules/jquery/dist/jquery.js',
@@ -19,7 +29,6 @@ module.exports = function(config) {
     ],
     exclude: [],
 
-    reporters: ['spec'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
