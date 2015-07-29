@@ -6,9 +6,7 @@ module HighlightSpecs {
   var expect = chai.expect;
   jasmine.getFixtures().fixturesPath = 'base/spec/fixtures';
 
-
   describe('highlight()', function() {
-
 
     describe('single text node', function() {
 
@@ -30,7 +28,6 @@ module HighlightSpecs {
         fixture.textContent
           .should.equal(originalText);
       });
-
 
       it('highlights range', function() {
 
@@ -55,7 +52,6 @@ module HighlightSpecs {
           .should.equal(originalLength - 27);
 
       });
-
     });
 
 
@@ -80,7 +76,6 @@ module HighlightSpecs {
           .should.equal(originalText);
       });
 
-
       it('highlights range', function() {
 
         var rangeStart = fixture.firstElementChild,
@@ -101,7 +96,6 @@ module HighlightSpecs {
         createdSpan.nextSibling.nodeType.should.equal(Node.TEXT_NODE);
 
       });
-
     });
 
 
@@ -125,7 +119,6 @@ module HighlightSpecs {
         fixture.textContent
           .should.equal(originalText);
       });
-
 
       it('highlights range', function() {
 
@@ -157,9 +150,7 @@ module HighlightSpecs {
           .firstChild.nodeName.should.equal('SPAN');
 
       });
-
     });
-
   });
 
 }
