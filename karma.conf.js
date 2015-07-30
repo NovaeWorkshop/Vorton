@@ -18,7 +18,7 @@ module.exports = function(config) {
 
     files: [
       'node_modules/jquery/dist/jquery.js',
-      'lib/highlight.js',
+      'lib/vorton.js',
       {
         pattern: 'spec/fixtures/*.html',
         watched: true,

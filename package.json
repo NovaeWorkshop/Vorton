@@ -1,8 +1,8 @@
 {
-  "name": "highlight",
+  "name": "vorton",
   "version": "0.0.1",
-  "description": "Javascript Highlighting Library",
-  "main": "highlight.js",
+  "description": "Javascript Range Transform Library",
+  "main": "lib/vorton.js",
   "scripts": {
     "postinstall": "tsd reinstall -so",
     "test": "gulp test"

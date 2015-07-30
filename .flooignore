@@ -6,3 +6,7 @@ extern/
 node_modules/
 tmp
 vendor/
+typings/
+lib/
+spec/.dist/
+coverage/

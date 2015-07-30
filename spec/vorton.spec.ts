@@ -1,7 +1,7 @@
 /// <reference path="../typings/tsd.d.ts" />
-/// <reference path="../src/highlight.ts" />
+/// <reference path="../src/vorton.ts" />
 
-module HighlightSpecs {
+module VortonSpecs {
 
   var expect = chai.expect;
   jasmine.getFixtures().fixturesPath = 'base/spec/fixtures';
@@ -34,7 +34,7 @@ module HighlightSpecs {
         selectionRange.setStart(fixture.firstChild, 5);
         selectionRange.setEnd(fixture.firstChild, 27);
 
-        Highlight.highlight(selectionRange, 'SPAN');
+        Vorton.highlight(selectionRange, 'SPAN');
 
         fixture.firstChild.nodeName
           .should.equal('#text');
@@ -85,7 +85,7 @@ module HighlightSpecs {
         selectionRange.setStart(rangeStart, 0);
         selectionRange.setEnd(rangeEnd, 22);
 
-        Highlight.highlight(selectionRange, 'SPAN');
+        Vorton.highlight(selectionRange, 'SPAN');
 
         var createdSpan = fixture.firstElementChild.firstElementChild.firstElementChild
           .firstChild;
@@ -128,7 +128,7 @@ module HighlightSpecs {
         selectionRange.setStart(rangeStart, 0);
         selectionRange.setEnd(rangeEnd, rangeEnd.textContent.length);
 
-        Highlight.highlight(selectionRange, 'SPAN');
+        Vorton.highlight(selectionRange, 'SPAN');
 
         var firstDiv = fixture.firstElementChild;
         var secondDiv = firstDiv.nextElementSibling;

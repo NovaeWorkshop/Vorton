@@ -5,4 +5,4 @@ before_install:
   - npm install -g gulp
   - npm install -g karma
   - npm install -g tsd
-repo_token: 299Zbv9iVQIpRbjXSNVPMESNWx7NNw16H
+repo_token: 57F6gXPSjX76gy8efUfLjoZ3q902YPGZB

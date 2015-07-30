@@ -1,4 +1,4 @@
-module Highlight {
+module Vorton {
 
   function isDescendantOrSame(child, parent) {
     var node = child;

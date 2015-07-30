@@ -22,7 +22,7 @@ gulp.task('typescript', function () {
     .pipe(typescript(tsProject));
 
   return tsResult
-    .pipe(concat('highlight.js'))
+    .pipe(concat('vorton.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./lib/'));
 });
