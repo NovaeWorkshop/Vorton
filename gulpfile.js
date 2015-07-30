@@ -23,7 +23,7 @@ gulp.task('typescript', function () {
 
   return tsResult
     .pipe(concat('vorton.js'))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./lib/'));
 });
 
@@ -42,7 +42,7 @@ gulp.task('typescript-tests', function () {
 
   return tsResult
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./spec/.dist/'));
+    .pipe(gulp.dest('./spec/.dist/'))
 });
 
 

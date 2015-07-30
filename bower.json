@@ -21,6 +21,7 @@
   "license": "MIT",
   "ignore": [
     "/.*",
+    "src",
     "node_modules",
     "package.json",
     "gulpfile.js",
