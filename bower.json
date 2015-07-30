@@ -1,0 +1,32 @@
+{
+  "name": "Vorton",
+  "version": "0.0.1",
+  "homepage": "https://github.com/NovaeWorkshop/Vorton",
+  "authors": [
+    "Christophe Feijoo <hello@kube.io>",
+    "Benjamin Lechiara <benjamin.lechiara@gmail.com>"
+  ],
+  "description": "Javascript Range Transform Library",
+  "main": "lib/vorton.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "range",
+    "highlight",
+    "range class-applier",
+    "text",
+    "range-transform"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "/.*",
+    "node_modules",
+    "package.json",
+    "gulpfile.js",
+    "tsd.json",
+    "spec",
+    "karma.conf.js",
+    "coverage"
+  ]
+}
