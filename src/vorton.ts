@@ -1,5 +1,10 @@
 module Vorton {
 
+  export function elementHasClass(element: HTMLElement, className: string) {
+    var elementClasses = element.className.split(' ');
+    return elementClasses.indexOf(className) !== -1;
+  }
+
   function isDescendantOrSame(child, parent) {
     var node = child;
     while (node != null) {
@@ -16,18 +21,17 @@ module Vorton {
   }
 
 
-  function eachRangeTextNode(range: Range, fn: Function) {
+  export function eachRangeTextNode(range: Range, fn: Function) {
 
     function processTextNodeRange(range: Range) {
 
-      var textNode: Text = <Text>range.startContainer;
+      var textNode = <Text>range.startContainer;
       var splittedTextNode = textNode
         .splitText(range.startOffset)
         .splitText(range.endOffset)
         .previousSibling;
 
       fn(splittedTextNode);
-      range.startContainer.parentNode.normalize();
     }
 
     function splitBreadthRange(range: Range) {
@@ -35,7 +39,7 @@ module Vorton {
       var leftRange = document.createRange();
       var rightRange = document.createRange();
 
-      leftRange.setStart(range.startContainer, 0);
+      leftRange.setStart(range.startContainer, range.startOffset);
 
       if (range.startContainer.nodeType === Node.TEXT_NODE) {
         leftRange.setEnd(range.startContainer, range.startContainer.textContent.length);
@@ -44,7 +48,13 @@ module Vorton {
         leftRange.setEnd(range.startContainer, 0);
       }
 
-      rightRange.setStart(range.startContainer.nextSibling, 0);
+      var leftRangeStartRoot = range.startContainer;
+
+      while (!leftRangeStartRoot.nextSibling) {
+        leftRangeStartRoot = leftRangeStartRoot.parentNode;
+      }
+
+      rightRange.setStart(leftRangeStartRoot.nextSibling, 0);
       rightRange.setEnd(range.endContainer, range.endOffset);
 
       processRange(leftRange);
@@ -87,20 +97,74 @@ module Vorton {
     processRange(range);
   }
 
+  export function getRangeTextNodes(range: Range): Array<Text> {
+    var textNodes = [];
 
-  export function highlight(range: Range, className: string) {
+    eachRangeTextNode(range, textNode => textNodes.push(textNode));
+    return textNodes;
+  }
+
+  function splitHighlight(textNode: Text) {
+
+    var container = textNode.parentElement;
+    var previousSibling = <Text>textNode.previousSibling;
+    var nextSibling = <Text>textNode.nextSibling;
+
+    if (previousSibling && previousSibling.length) {
+      var beforeNode = document.createElement('SPAN');
+      beforeNode.className = container.className;
+      beforeNode.appendChild(previousSibling);
+
+      container.parentNode
+        .insertBefore(beforeNode, container);
+    }
+
+    container.parentNode
+      .insertBefore(textNode, container);
+
+    if (nextSibling && nextSibling.length) {
+      var afterNode = document.createElement('SPAN');
+      afterNode.className = container.className;
+      afterNode.appendChild(nextSibling);
+
+      container.parentNode
+        .insertBefore(afterNode, container);
+    }
+
+    container.parentNode
+      .removeChild(container);
+  }
+
+  export function highlight(range: Range, className: string, genericClassName?: string) {
 
     eachRangeTextNode(range, function(node: Text) {
 
       if (!isEmptyNode(node)) {
+
+        if (elementHasClass(node.parentElement, genericClassName)) {
+          splitHighlight(node);
+        }
+
         var wrapper = document.createElement('SPAN');
         node.parentNode.insertBefore(wrapper, node);
-        wrapper.className = className;
+        wrapper.className = (genericClassName ? genericClassName + ' ' : '') + className;
         wrapper.appendChild(node);
+        wrapper.normalize();
+        wrapper.parentNode.normalize();
       }
-
     });
+  }
 
+  export function clear(range: Range, genericClassName: string) {
+
+    eachRangeTextNode(range, function(textNode: Text) {
+
+      if (elementHasClass(textNode.parentElement, genericClassName)) {
+        splitHighlight(textNode);
+        textNode.normalize();
+        textNode.parentNode.normalize();
+      }
+    });
   }
 
 }

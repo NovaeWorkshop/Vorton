@@ -1,7 +1,7 @@
 {
   "name": "vorton",
-  "version": "0.0.1",
-  "description": "Javascript Range Transform Library",
+  "version": "0.0.3",
+  "description": "Javascript Range Manipulation Library",
   "main": "lib/vorton.js",
   "scripts": {
     "postinstall": "tsd reinstall -so",
