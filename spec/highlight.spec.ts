@@ -6,30 +6,33 @@ module VortonSpecs {
   var expect = chai.expect;
   jasmine.getFixtures().fixturesPath = 'base/spec/fixtures';
 
-  describe('highlight()', function() {
+  describe('highlight()', () => {
 
-    describe('single text node', function() {
+    var fixture: HTMLElement,
+      fixtureUrl: string,
+      selectionRange: Range,
+      originalText: string,
+      originalLength: number;
 
-      var fixture: HTMLElement,
-        selectionRange: Range,
-        originalText: string,
-        originalLength: number;
-
-      beforeEach(function() {
-        loadFixtures('singleTextNode.html');
+    beforeEach(() => {
+        loadFixtures(fixtureUrl);
 
         fixture = $('#test')[0];
         selectionRange = document.createRange();
         originalText = fixture.textContent;
         originalLength = originalText.length;
-      });
+    });
 
-      afterEach(function() {
-        fixture.textContent
-          .should.equal(originalText);
-      });
+    afterEach(() =>
+      fixture.textContent
+        .should.equal(originalText));
 
-      it('highlights range', function() {
+    describe('single text node', () => {
+
+      beforeAll(() =>
+        fixtureUrl = 'singleTextNode.html');
+
+      it('highlights range', () => {
 
         selectionRange.setStart(fixture.firstChild, 5);
         selectionRange.setEnd(fixture.firstChild, 27);
@@ -43,10 +46,10 @@ module VortonSpecs {
 
         fixture.firstChild.nextSibling.nodeName
           .should.equal('SPAN');
-        fixture.firstChild.nextSibling.className
-          .should.equal('red');
         fixture.firstChild.nextSibling.textContent.length
           .should.equal(22);
+        (<HTMLElement>fixture.firstChild.nextSibling)
+          .className.should.equal('red');
 
         fixture.firstChild.nextSibling.nextSibling.nodeName
           .should.equal('#text');
@@ -57,28 +60,12 @@ module VortonSpecs {
     });
 
 
-    describe('text node in nested divs', function() {
+    describe('text node in nested divs', () => {
 
-      var fixture: HTMLElement,
-        selectionRange: Range,
-        originalText: string,
-        originalLength: number;
+      beforeAll(() =>
+        fixtureUrl = 'textNodeInNestedDivs.html');
 
-      beforeEach(function() {
-        loadFixtures('textNodeInNestedDivs.html');
-
-        fixture = $('#test')[0];
-        selectionRange = document.createRange();
-        originalText = fixture.textContent;
-        originalLength = originalText.length;
-      });
-
-      afterEach(function() {
-        fixture.textContent
-          .should.equal(originalText);
-      });
-
-      it('highlights range', function() {
+      it('highlights range', () => {
 
         var rangeStart = fixture.firstElementChild,
           rangeEnd = rangeStart.firstElementChild.firstElementChild.firstChild,
@@ -107,28 +94,12 @@ module VortonSpecs {
     });
 
 
-    describe('text nodes in sibling divs', function() {
+    describe('text nodes in sibling divs', () => {
 
-      var fixture: HTMLElement,
-        selectionRange: Range,
-        originalText: string,
-        originalLength: number;
+      beforeAll(() =>
+        fixtureUrl = 'textNodesInSiblingDivs.html');
 
-      beforeEach(function() {
-        loadFixtures('textNodesInSiblingDivs.html');
-
-        fixture = $('#test')[0];
-        selectionRange = document.createRange();
-        originalText = fixture.textContent;
-        originalLength = originalText.length;
-      });
-
-      afterEach(function() {
-        fixture.textContent
-          .should.equal(originalText);
-      });
-
-      it('highlights range', function() {
+      it('highlights whole range', () => {
 
         var rangeStart = fixture.firstElementChild,
           rangeEnd = fixture.lastElementChild.firstChild;
@@ -146,22 +117,61 @@ module VortonSpecs {
           .childNodes.length.should.equal(1);
         firstDiv
           .firstChild.nodeName.should.equal('SPAN');
+        (<HTMLElement>firstDiv.firstChild)
+          .className.should.equal('red');
+
+        secondDiv
+          .childNodes.length.should.equal(1);
+        secondDiv
+          .firstChild.nodeName.should.equal('SPAN');
+        (<HTMLElement>secondDiv.firstChild)
+          .className.should.equal('red');
+
+        thirdDiv
+          .childNodes.length.should.equal(1);
+        thirdDiv
+          .firstChild.nodeName.should.equal('SPAN');
+        (<HTMLElement>thirdDiv.firstChild)
+          .className.should.equal('red');
+
+      });
+
+      it('highlights range not starting at commonAncestor', () => {
+
+        var rangeStart = fixture.firstElementChild,
+          rangeEnd = fixture.lastElementChild.firstChild;
+
+        selectionRange.setStart(rangeStart.firstChild, 20);
+        selectionRange.setEnd(rangeEnd, rangeEnd.textContent.length);
+
+        Vorton.highlight(selectionRange, 'red');
+
+        var firstDiv = fixture.firstElementChild;
+        var secondDiv = firstDiv.nextElementSibling;
+        var thirdDiv = secondDiv.nextElementSibling;
+
         firstDiv
-          .firstChild.className.should.equal('red');
+          .childNodes.length.should.equal(2);
+        firstDiv
+          .firstChild.nodeType.should.equal(Node.TEXT_NODE);
+        firstDiv
+          .firstChild.nextSibling.nodeName.should.equal('SPAN');
+        (<HTMLElement>firstDiv.firstChild.nextSibling)
+          .className.should.equal('red');
 
         secondDiv
           .childNodes.length.should.equal(1);
-        secondDiv
-          .firstChild.nodeName.should.equal('SPAN');
-        secondDiv
-          .firstChild.className.should.equal('red');
+        secondDiv.firstChild
+          .nodeName.should.equal('SPAN');
+        (<HTMLElement>secondDiv.firstChild)
+          .className.should.equal('red');
 
         thirdDiv
           .childNodes.length.should.equal(1);
         thirdDiv
           .firstChild.nodeName.should.equal('SPAN');
-        thirdDiv
-          .firstChild.className.should.equal('red');
+        (<HTMLElement>thirdDiv.firstChild)
+          .className.should.equal('red');
 
       });
     });
