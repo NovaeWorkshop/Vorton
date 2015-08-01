@@ -88,13 +88,14 @@ module Vorton {
   }
 
 
-  export function highlight(range: Range, nodeName: string) {
+  export function highlight(range: Range, className: string) {
 
     eachRangeTextNode(range, function(node: Text) {
 
       if (!isEmptyNode(node)) {
-        var wrapper = document.createElement(nodeName);
+        var wrapper = document.createElement('SPAN');
         node.parentNode.insertBefore(wrapper, node);
+        wrapper.className = className;
         wrapper.appendChild(node);
       }
 

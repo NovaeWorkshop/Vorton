@@ -34,7 +34,7 @@ module VortonSpecs {
         selectionRange.setStart(fixture.firstChild, 5);
         selectionRange.setEnd(fixture.firstChild, 27);
 
-        Vorton.highlight(selectionRange, 'SPAN');
+        Vorton.highlight(selectionRange, 'red');
 
         fixture.firstChild.nodeName
           .should.equal('#text');
@@ -43,6 +43,8 @@ module VortonSpecs {
 
         fixture.firstChild.nextSibling.nodeName
           .should.equal('SPAN');
+        fixture.firstChild.nextSibling.className
+          .should.equal('red');
         fixture.firstChild.nextSibling.textContent.length
           .should.equal(22);
 
@@ -85,15 +87,21 @@ module VortonSpecs {
         selectionRange.setStart(rangeStart, 0);
         selectionRange.setEnd(rangeEnd, 22);
 
-        Vorton.highlight(selectionRange, 'SPAN');
+        Vorton.highlight(selectionRange, 'red');
 
-        var createdSpan = fixture.firstElementChild.firstElementChild.firstElementChild
+        var createdSpan = <HTMLElement>fixture.firstElementChild.firstElementChild.firstElementChild
           .firstChild;
 
         fixture.children.length.should.equal(1);
-        createdSpan.nodeName.should.equal('SPAN');
-        createdSpan.textContent.length.should.equal(22);
-        createdSpan.nextSibling.nodeType.should.equal(Node.TEXT_NODE);
+
+        createdSpan.nodeName
+          .should.equal('SPAN');
+        createdSpan.className
+          .should.equal('red');
+        createdSpan.textContent.length
+          .should.equal(22);
+        createdSpan.nextSibling.nodeType
+          .should.equal(Node.TEXT_NODE);
 
       });
     });
@@ -128,7 +136,7 @@ module VortonSpecs {
         selectionRange.setStart(rangeStart, 0);
         selectionRange.setEnd(rangeEnd, rangeEnd.textContent.length);
 
-        Vorton.highlight(selectionRange, 'SPAN');
+        Vorton.highlight(selectionRange, 'red');
 
         var firstDiv = fixture.firstElementChild;
         var secondDiv = firstDiv.nextElementSibling;
@@ -138,16 +146,22 @@ module VortonSpecs {
           .childNodes.length.should.equal(1);
         firstDiv
           .firstChild.nodeName.should.equal('SPAN');
+        firstDiv
+          .firstChild.className.should.equal('red');
 
         secondDiv
           .childNodes.length.should.equal(1);
         secondDiv
           .firstChild.nodeName.should.equal('SPAN');
+        secondDiv
+          .firstChild.className.should.equal('red');
 
         thirdDiv
           .childNodes.length.should.equal(1);
         thirdDiv
           .firstChild.nodeName.should.equal('SPAN');
+        thirdDiv
+          .firstChild.className.should.equal('red');
 
       });
     });
